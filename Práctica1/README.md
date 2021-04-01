@@ -10,7 +10,7 @@ _Practica1-2021-2.pdf_ de esta carpeta.
 Desarrollé la práctica con **Python 3** por lo que este es necesario y 
 usé la librería _**pygame**_ para crear la interfaz de usuario por lo
 que es necesario instalarla antes de correr el programa. Esto se puede
-hacer con el siguiente comando:
+hacer con el siguiente comando usando _pip3_:
 
 ```
 pip3 install pygame
