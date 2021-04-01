@@ -80,12 +80,12 @@ def get_adoqs(esq, rango, esp, tam):
     """
     num_rot = get_cuad(esq, rango, esp, tam)
     if rango == 2:
-        adoq = [(esq[0] + 1, esq[1] + 1),
-                (esq[0] + (2 * tam) - 1, esq[1] + 1),
-                (esq[0] + (2 * tam) - 1, esq[1] + tam - 1),
-                (esq[0] + tam - 1, esq[1] + tam - 1),
-                (esq[0] + tam - 1, esq[1] + (2 * tam) - 1),
-                (esq[0] + 1, esq[1] + (2 * tam) - 1)]
+        adoq = [(esq[0], esq[1]),
+                (esq[0] + (2 * tam), esq[1]),
+                (esq[0] + (2 * tam), esq[1] + tam),
+                (esq[0] + tam, esq[1] + tam),
+                (esq[0] + tam, esq[1] + (2 * tam)),
+                (esq[0], esq[1] + (2 * tam))]
         for i in range(6):
             for j in range(num_rot):
                 adoq[i] = rot_punto(esq, rango, adoq[i], tam)
@@ -93,12 +93,12 @@ def get_adoqs(esq, rango, esp, tam):
     else:
         centro_x = esq[0] + (rango // 2) * tam
         centro_y = esq[1] + (rango // 2) * tam
-        central = [(centro_x - 1, centro_y - 1),
-                   (centro_x - 1, centro_y + tam - 1),
-                   (centro_x - tam + 1, centro_y + tam - 1),
-                   (centro_x - tam + 1, centro_y - tam + 1),
-                   (centro_x + tam - 1, centro_y - tam + 1),
-                   (centro_x + tam - 1, centro_y - 1)]
+        central = [(centro_x, centro_y),
+                   (centro_x, centro_y + tam),
+                   (centro_x - tam, centro_y + tam),
+                   (centro_x - tam, centro_y - tam),
+                   (centro_x + tam, centro_y - tam),
+                   (centro_x + tam, centro_y)]
         for i in range(6):
             for j in range(num_rot):
                 central[i] = rot_punto(esq, rango, central[i], tam)
