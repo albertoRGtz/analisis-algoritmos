@@ -18,7 +18,7 @@ def main():
     col_lin = 255, 255, 255
 
     'Creación de la pantalla.'
-    size = 513
+    size = 641
     screen = pygame.display.set_mode((size, size))
     pygame.display.set_caption('Adoquinador')
     screen.fill(col_bg)
@@ -30,7 +30,7 @@ def main():
         else:
             'Pantalla de bienvenida'
             fuente1 = pygame.font.Font('freesansbold.ttf', 64)
-            wm = fuente1.render(' !Bienvenido! ', True, col_adoq, col_esp)
+            wm = fuente1.render(' ¡Bienvenido! ', True, col_adoq, col_esp)
             wm_rect = wm.get_rect()
             wm_rect.center = (size // 2, size // 3)
 
@@ -60,10 +60,10 @@ def main():
         'Dibuja la cuadrícula inicial.'
         tam = (size - 1) / m
         for i in range(m):
-            pygame.draw.line(screen, col_lin, (i * tam, 0), (i * tam, size), 1)
-            pygame.draw.line(screen, col_lin, (0, i * tam), (size, i * tam), 1)
-        pygame.draw.line(screen, col_lin, (size - 1, 0), (size - 1, size), 1)
-        pygame.draw.line(screen, col_lin, (0, size - 1), (size, size - 1), 1)
+            pygame.draw.line(screen, col_lin, (i * tam, 0), (i * tam, size))
+            pygame.draw.line(screen, col_lin, (0, i * tam), (size, i * tam))
+        pygame.draw.line(screen, col_lin, (size - 1, 0), (size - 1, size))
+        pygame.draw.line(screen, col_lin, (0, size - 1), (size, size - 1))
 
         'Para elegir la celda especial con el mouse.'
         esp = None
@@ -87,14 +87,22 @@ def main():
         'Obtiene los adoquines para el cuadrito seleccionado.'
         adoquines = get_adoqs((0, 0), m, esp, tam)
 
-        'Segundos para que la ejec dure 10s.'
-        secs = 30 / (m * m)
+        'Segundos para la ejecución dure 2k seg'
+        secs = (3 * k) / (m * m - 1)
 
         'Dibuja los polígonos que fueron calculados.'
         for adoquin in adoquines:
+            for evento in pygame.event.get():
+                if evento.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+            if k < 8:
+                time.sleep(secs)
             pygame.draw.polygon(screen, col_adoq, adoquin, 0)
+            for i in range(5):
+                pygame.draw.line(screen, col_lin, adoquin[i], adoquin[i + 1])
+            pygame.draw.line(screen, col_lin, adoquin[5], adoquin[0])
             pygame.display.flip()
-            time.sleep(secs)
 
         'Para mantener abierto el programa.'
         keep_open = True
